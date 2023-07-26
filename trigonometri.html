@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelombang Trigonometri</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        var params = {"id":"ggbApplet","appName": "classic", "width": 1000, "height": 400, "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "showResetIcon":false };
+        var applet = new GGBApplet('5.0',params);
+        window.onload=function(){
+            applet.inject('ggb-element')
+        }
+    </script>
+    <style>
+        #judul{
+            text-align:center;
+            font-family:"bauhaus 93";
+            font-size:30px;
+            color:white;
+            text-shadow:3px 3px 3px black;
+        }
+        #desain{
+            width:80%;
+            text-align:center;
+            background-color:yellow;
+            padding:20px;
+            border:3px solid black;
+            border-radius:10px;
+        }
+        .kotak{
+            width:40%;
+            float:left;
+            border:3px solid black;
+            border-radius:10px;
+            padding:10px;
+        }
+        #tata{
+            line-height:2;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="judul">Gelombang trigonometri</div><br>
+    <div id="desain"><div id="ggb-element"></div></div>
+    <div>
+        <div class="kotak" style="background-color:aquamarine">
+            <div>Pilih salah satu fungsi Trigonometri</div><br>
+                <div id="tata">
+                    <input type="radio" class="pilih" value="sin" name="trig">Sinus<br>
+                    <input type="radio" class="pilih" value="cos" name="trig">Cosinus<br>
+                    <input type="radio" class="pilih" value="tan" name="trig">Tangensial<br>
+                </div>
+                <div>
+                    <p id="tuliskan"></p>
+                </div>
+            </div>
+        </div>
+        <div class="kotak" style="background-color:aqua">
+            <div>Property Trigonometri</div>
+            <div style="background-color:gold;padding:3px;text-align:center;margin:20px;border-radius:10px"><input type="button" value="Aplitudo"  style="font-family:brush script mt; font-size:20px;font-weight:bold">   <input type="text" width="10px" id="amp" value="1" ></div>
+            <div style="background-color:gold;padding:3px;text-align:center;margin:20px;border-radius:10px"><input type="button" value="Kelipatan Sudut"  style="font-family:brush script mt; font-size:20px;font-weight:bold">   <input type="text" width="10px" id="kel" value="1"></div>
+            <div style="background-color:gold;padding:3px;text-align:center;margin:20px;border-radius:10px"><input type="button" value="Pergeseran"  style="font-family:brush script mt; font-size:20px;font-weight:bold">   <input type="text" width="10px" id="gsr" value="0"></div>
+        </div>
+    <script>
+        function jalankan(){
+            var ampl =document.getElementById("amp")
+            var kelp = document.getElementById("kel")
+            var gesr = document.getElementById("gsr")
+            var tulisan2=""
+            for(var i=0;i<3;i++){
+                var tombol = document.getElementsByClassName("pilih").item(i)
+                if(tombol.checked){
+                    var keterangan = document.getElementById("tuliskan")
+                    tulisan2=ampl.value+"\\"+tombol.value+"{("+kelp.value+"x+"+gesr.value+")}"
+                    keterangan.innerHTML = katex.renderToString(tulisan2)
+                    ggbApplet.evalCommand("f(x)="+ampl.value+""+tombol.value+"("+kelp.value+"x+"+gesr.value+"*pi/180)")
+                    break;
+                }
+            } 
+        }
+        setInterval(jalankan,100)
+        
+    </script>
+</body>
+</html>
